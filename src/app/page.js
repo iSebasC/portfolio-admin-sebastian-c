@@ -30,6 +30,8 @@ export default function Home() {
     setFormData({ nombre: '', apellido: '', area: '', comentario: '' });
     setTimeout(() => setAlerta(null), 5000);
   };
+
+  console.log(process.env.NEXT_PUBLIC_API_URL);
   
 
   return (
