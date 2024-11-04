@@ -3,7 +3,7 @@
 import { useState } from 'react';
 
 export default function Home() {
-  const [formData, setFormData] = useState({ nombre: '', apellido: '', area: '', comentario: '' });
+  const [formData, setFormData] = useState({ nombre: '', apellido: '', area: '', linkedin: '', comentario: '' });
   const [alerta, setAlerta] = useState(null);
 
   const handleChange = (e) => {
@@ -27,7 +27,7 @@ export default function Home() {
     } catch (error) {
       setAlerta({ tipo: 'error', mensaje: 'Error de conexión con el servidor' });
     }
-    setFormData({ nombre: '', apellido: '', area: '', comentario: '' });
+    setFormData({ nombre: '', apellido: '', area: '', linkedin: '', comentario: '' });
     setTimeout(() => setAlerta(null), 5000);
   };
 
@@ -63,7 +63,7 @@ export default function Home() {
 
           <div className="mb-4">
             <label className="block text-gray-700">Linkedin</label>
-            <input type="text" name="area" value={formData.linkedin} onChange={handleChange} className="w-full p-2 border border-gray-300 rounded mt-1 text-black" />
+            <input type="text" name="linkedin" value={formData.linkedin} onChange={handleChange} className="w-full p-2 border border-gray-300 rounded mt-1 text-black" />
           </div>
 
 
