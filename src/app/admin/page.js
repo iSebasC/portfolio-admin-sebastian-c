@@ -1,67 +1,64 @@
-// src/app/admin/page.js
-"use client";
-import { useEffect, useState } from "react";
-import AdminLayout from "../layouts/Admin";
+"use client"; // Indica que es un componente de cliente en Next.js
 
-export default function Admin() {
+import { useState, useEffect } from 'react';
+
+export default function AdminPage() {
   const [valoraciones, setValoraciones] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchValoraciones = async () => {
       try {
         const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/obtener`);
-        if (response.ok) {
-          const result = await response.json();
-          setValoraciones(result.data);
-        } else {
-          console.error("Error en la respuesta de la API", response.status);
+        if (!response.ok) {
+          throw new Error('Error al obtener las valoraciones');
         }
+        const data = await response.json();
+        setValoraciones(data.data); // Asegúrate de acceder a los datos correctamente
       } catch (error) {
-        console.error("Error fetching valoraciones:", error);
+        setError(error.message);
+      } finally {
+        setLoading(false);
       }
     };
+
     fetchValoraciones();
   }, []);
 
   return (
-    <AdminLayout>
-      <div className="min-h-screen bg-gray-100 flex items-center justify-center">
-        <div className="card w-full max-w-4xl shadow-lg bg-white p-6 rounded-lg">
-          <h2 className="text-2xl font-bold mb-4">Valoraciones de Usuarios</h2>
-          <div className="overflow-x-auto">
-            <table className="table w-full">
-              <thead>
-                <tr>
-                  <th>Nombre</th>
-                  <th>Apellido</th>
-                  <th>Área</th>
-                  <th>Linkedin</th>
-                  <th>Comentario</th>
+    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+      <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-2xl">
+        <h1 className="text-2xl font-bold mb-6 text-gray-800">Valoraciones de Usuarios</h1>
+        {loading ? (
+          <p>Cargando valoraciones...</p>
+        ) : error ? (
+          <p className="text-red-500">{error}</p>
+        ) : (
+          <table className="w-full border-collapse text-black">
+            <thead>
+              <tr>
+                <th className="border p-2 text-left">Nombre</th>
+                <th className="border p-2 text-left">Apellido</th>
+                <th className="border p-2 text-left">Área</th>
+                <th className="border p-2 text-left">Linkedin</th> 
+                <th className="border p-2 text-left">Comentario</th>
+              </tr>
+            </thead>
+            <tbody>
+              {valoraciones.map((valoracion, index) => (
+                <tr key={index} className="border-t">
+                  <td className="border p-2">{valoracion.nombre}</td>
+                  <td className="border p-2">{valoracion.apellido}</td>
+                  <td className="border p-2">{valoracion.area}</td>
+                  <td className="border p-2">{valoracion.linkedin}</td>
+                  <td className="border p-2">{valoracion.comentario}</td>
                 </tr>
-              </thead>
-              <tbody>
-                {valoraciones.length > 0 ? (
-                  valoraciones.map((valoracion, index) => (
-                    <tr key={index}>
-                      <td>{valoracion.nombre}</td>
-                      <td>{valoracion.apellido}</td>
-                      <td>{valoracion.area}</td>
-                      <td>{valoracion.linkedin}</td>
-                      <td>{valoracion.comentario}</td>
-                    </tr>
-                  ))
-                ) : (
-                  <tr>
-                    <td colSpan="4" className="text-center">
-                      No hay valoraciones disponibles.
-                    </td>
-                  </tr>
-                )}
-              </tbody>
-            </table>
-          </div>
-        </div>
+              ))}
+            </tbody>
+          </table>
+        )}
       </div>
-    </AdminLayout>
+    </div>
   );
 }
