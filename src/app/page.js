@@ -57,9 +57,15 @@ export default function Home() {
           </div>
 
           <div className="mb-4">
-            <label className="block text-gray-700">Área</label>
+            <label className="block text-gray-700">Especialidad / Area</label>
             <input type="text" name="area" value={formData.area} onChange={handleChange} className="w-full p-2 border border-gray-300 rounded mt-1 text-black" />
           </div>
+
+          <div className="mb-4">
+            <label className="block text-gray-700">Linkedin</label>
+            <input type="text" name="area" value={formData.linkedin} onChange={handleChange} className="w-full p-2 border border-gray-300 rounded mt-1 text-black" />
+          </div>
+
 
           <div className="mb-4">
             <label className="block text-gray-700">Comentario</label>
