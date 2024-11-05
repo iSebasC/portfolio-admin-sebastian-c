@@ -76,36 +76,34 @@ export default function Home() {
           </div>
         )}
 
-        <div className="space-y-8">
+        <form onSubmit={handleSubmit} className="space-y-8">
           <section>
             <h2 className="text-xl font-medium text-gray-700 mb-4">
               Información Personal
             </h2>
-            <form onSubmit={handleSubmit} className="space-y-6">
-              {[
-                { label: "Nombre", name: "nombre", placeholder: "Ej. Juan" },
-                {
-                  label: "Apellido",
-                  name: "apellido",
-                  placeholder: "Ej. Pérez",
-                },
-              ].map((field, index) => (
-                <div key={index}>
-                  <label className="block text-sm font-medium text-gray-600">
-                    {field.label}
-                  </label>
-                  <input
-                    type="text"
-                    name={field.name}
-                    placeholder={field.placeholder}
-                    value={formData[field.name]}
-                    onChange={handleChange}
-                    className="mt-1 w-full px-4 py-2 bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300 text-black"
-                    required
-                  />
-                </div>
-              ))}
-            </form>
+            {[
+              { label: "Nombre", name: "nombre", placeholder: "Ej. Juan" },
+              {
+                label: "Apellido",
+                name: "apellido",
+                placeholder: "Ej. Pérez",
+              },
+            ].map((field, index) => (
+              <div key={index}>
+                <label className="block text-sm font-medium text-gray-600">
+                  {field.label}
+                </label>
+                <input
+                  type="text"
+                  name={field.name}
+                  placeholder={field.placeholder}
+                  value={formData[field.name]}
+                  onChange={handleChange}
+                  className="mt-1 w-full px-4 py-2 bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300 text-black"
+                  required
+                />
+              </div>
+            ))}
           </section>
 
           <section>
@@ -165,14 +163,14 @@ export default function Home() {
               </p>
             </div>
           </section>
-        </div>
 
-        <button
-          type="submit"
-          className="w-full bg-blue-600 text-white font-medium py-3 rounded-lg hover:bg-blue-700 transition duration-200"
-        >
-          Enviar comentario
-        </button>
+          <button
+            type="submit"
+            className="w-full bg-blue-600 text-white font-medium py-3 rounded-lg hover:bg-blue-700 transition duration-200"
+          >
+            Enviar comentario
+          </button>
+        </form>
       </div>
     </div>
   );
