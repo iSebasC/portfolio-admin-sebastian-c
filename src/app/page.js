@@ -158,10 +158,10 @@ export default function Home() {
                 rows="4"
                 required
               ></textarea>
-              <p className="mt-2 text-xs text-gray-500">
-                Ejemplo de comentario: "Dinámico y responsable, con gran
+              <p className="mt-2 text-sm text-gray-500">
+                Ejemplo de comentario: &quot;Dinámico y responsable, con gran
                 capacidad para resolver problemas y aportar ideas innovadoras en
-                cada proyecto."
+                cada proyecto.&quot;
               </p>
             </div>
           </section>
